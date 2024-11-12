@@ -1,0 +1,248 @@
+:root {
+  --pblue: #2b6777ff;
+  --lpblue: #4b9d9eff;
+  --yell: #ffd166;
+  --principal-font: #f2efeaff;
+  --tufts-blue: #218cd3ff;
+  --persian-green: #25a299ff;
+  --dark-goldenrod: #b68a00ff;
+  --syracuse-red-orange: #cc4a0eff;
+  --eggshell: #eee9d6;
+  --gunmetal: #002733ff;
+  --midnight-green: #013340ff;
+  --apple-green: #869a00ff;
+  --medium-slate-blue: #6c72c5ff;
+}
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: #333;
+  line-height: 1.6;
+  background-color: var(--eggshell);
+}
+
+/* Header */
+header {
+  background-color: var(--midnight-green);
+  padding: 1em 2em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+nav ul li {
+  margin: 0 1.5em;
+}
+
+nav ul li a {
+  color: var(--principal-font);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: var(--dark-goldenrod);
+}
+
+/* main Section */
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3em 1.5em;
+  background: linear-gradient(
+    180deg,
+    var(--midnight-green) 1%,
+    var(--persian-green) 100%
+  );
+  color: var(--principal-font);
+  text-align: center;
+}
+
+.head h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5em;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.head p {
+  font-size: 1.2rem;
+  margin-bottom: 2em;
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1em;
+}
+
+.cta-buttons .button {
+  padding: 0.8em 2em;
+  font-size: 1rem;
+  color: var(--principal-font);
+  background-color: var(--dark-goldenrod);
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.cta-buttons .button:hover {
+  background-color: var(--syracuse-red-orange);
+  color: var(--principal-font);
+  transform: translateY(-2px);
+}
+
+/* Upcoming Slots Section */
+.upcoming-slots {
+  padding: 2em;
+  max-width: 900px;
+  margin: 2em auto;
+}
+
+.upcoming-slots h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1em;
+  color: #2b6777;
+  text-align: center;
+  animation: slideIn 0.5s ease;
+}
+
+.upcoming-slots ul {
+  list-style-type: none;
+}
+
+.upcoming-slots ul li {
+  background-color: var(--principal-font);
+  padding: 1.5em;
+  margin-bottom: 1em;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.upcoming-slots ul li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.upcoming-slots ul li strong {
+  color: #2b6777;
+}
+
+/* Footer */
+footer {
+  background-color: #2b6777;
+  color: var(--principal-font);
+  padding: 1.5em 0;
+  text-align: center;
+}
+
+footer p {
+  margin-bottom: 0.5em;
+}
+
+footer ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1.5em;
+}
+
+footer ul li a {
+  color: var(--yell);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+footer ul li a:hover {
+  color: #f4a261;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/*FORMULAIRES*/
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--pblue);
+  border-radius: 1rem;
+  width: 20rem;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+form h2 {
+  text-align: center;
+  font-weight: 100;
+  color: var(--principal-font);
+}
+
+form input {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--lighter-border);
+  background-color: var(--lpblue);
+  color: var(--principal-font);
+}
+
+form button {
+  padding: 0.8em 2em;
+  width: auto;
+  border-radius: 0.5rem;
+  border: 1px solid var(--lighter-border);
+  background-color: var(--yell);
+  color: var(--pblue);
+  cursor: pointer;
+  transition: 0.6s;
+}
+
+form button:hover {
+  background-color: var(--oran);
+  transition: 0.3s;
+}
+
+form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
