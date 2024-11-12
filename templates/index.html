@@ -68,7 +68,34 @@
     </div>
   </section>
 
+<!-- Section des categories -->
+<section class="categories-container">
+  <h3>Categories</h3>
+  <div class="categories-list">
+  {% for category in categories %}
+<div class="categories"><p>{{ category }}</p></div>
+  {% endfor %}
+    </div>
+</section>
+
 {% else %}
-<p>You are not logged in</p>
+
+
+
+<section class="categories-container">
+  <h3>Categories</h3>
+  <div class="categories-list">
+  {% for category in categories %}
+<div class="categories"><p>{{ category }}</p></div>
+  {% endfor %}
+    </div>
+</section>
+
+
+<p>You are not logged in site</p>
+
+
+
+
 {% endif %}
 {% endblock %}
