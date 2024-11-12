@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+  <!-- En-tête de navigation -->
+  <header>
+    <nav>
+      <ul>
+          {% if user.is_authenticated %}
+        <li><a href="/">Accueil</a></li>
+        <li><a href="/competences">Compétences</a></li>
+        <li><a href="{% url 'mutual_support:logout' %}">Déconnexion</a></li>
+        <li><a href="/profile">{{ user.username }}</a></li>
+
+          {% else %}
+        <li><a href="/">Accueil</a></li>
+        <li><a href="/competences">Compétences</a></li>
+        <li><a href="{% url 'mutual_support:login' %}">Connexion</a></li>
+          {% endif %}
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Section head -->
+  <section class="head">
+    <h1>Votre talent, notre lien. Ensemble, on s’entraide.</h1>
+    <p>Trouvez des personnes près de chez vous pour vous aider avec vos tâches ou proposez vos propres compétences.</p>
+    <div class="cta-buttons">
+      <a href="/trouver-aide" class="button">Trouver de l'aide</a>
+      <a href="/offrir-aide" class="button">Offrir de l'aide</a>
+    </div>
+  </section>
+
+{% if user.is_authenticated %}
+
+
+  <!-- Section des créneaux disponibles -->
+  <section class="upcoming-slots">
+    <h2>Prochains créneaux disponibles</h2>
+
+    <!-- Sous-section des offres d'aide -->
+    <div class="help-offers">
+      <h3>Offres d'aide</h3>
+      <ul>
+        <li>
+          <strong>Compétence :</strong> Jardinage <br>
+          <strong>Date :</strong> 15 novembre
+        </li>
+        <li>
+          <strong>Compétence :</strong> Réparation de vélo <br>
+          <strong>Date :</strong> 20 novembre
+        </li>
+
+      </ul>
+    </div>
+
+    <!-- Sous-section des demandes d'aide -->
+    <div class="help-requests">
+      <h3>Demandes d'aide</h3>
+      <ul>
+        <li>
+          <strong>Compétence :</strong> Administration d'ordinateur <br>
+          <strong>Date :</strong> 18 novembre
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+{% else %}
+<p>You are not logged in</p>
+{% endif %}
+{% endblock %}
