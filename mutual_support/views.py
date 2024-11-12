@@ -2,11 +2,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 
+from mutual_support.models import Competence
+
 INDEX_PAGE = 'mutual_support:index'
 
 
 def index(request):
-    return render(request, 'index.html')
+    categories = Competence.objects.values_list('category', flat=True).distinct()
+    print(categories)
+    context = {
+        'categories': categories
+    }
+    return render(request, 'index.html', context)
 
 
 def login_view(request):
