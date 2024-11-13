@@ -30,7 +30,7 @@ class Competence(models.Model):
 
 class Creneau(models.Model):
     date = models.DateField()
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="creneaux")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="creneaux")
     competence = models.ForeignKey(Competence, on_delete=models.CASCADE)
     is_help_offered = models.BooleanField(default=True)  # True: offre d'aide, False: demande d'aide
     description = models.TextField(blank=True,
