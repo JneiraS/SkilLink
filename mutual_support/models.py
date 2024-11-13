@@ -25,5 +25,14 @@ class Creneau(models.Model):
     competence = models.ForeignKey(Competence, on_delete=models.CASCADE)
     is_help_offered = models.BooleanField(default=True)  # True: offre d'aide, False: demande d'aide
     description = models.TextField(blank=True,
-                                   null=True)  # Description de l'activité si c'est une demande d'aide
+                                   null=True)
     is_reserved = models.BooleanField(default=False)
+
+
+class UserCompetence(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    competence = models.ForeignKey(Competence, on_delete=models.CASCADE)
+    is_offering = models.BooleanField(default=True)  # True: offre, False: recherche
+
+    def __str__(self):
+        return f"{self.user} - {self.competence} ({'offre' if self.is_offering else 'recherche'})"
