@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
-{% block content %}
-
-
+{% block header %}
 <!-- En-tête de navigation -->
 <header>
     <nav>
@@ -21,7 +19,9 @@
         </ul>
     </nav>
 </header>
+{% endblock %}
 
+{% block content %}
 <!-- Section head -->
 <section class="head">
     <h1>Votre talent, notre lien. Ensemble, on s’entraide.</h1>
@@ -45,23 +45,29 @@
         {% if user.is_authenticated %}
         <ul>
             {% for offer in offers %}
+            {% if offer.is_help_offered and not offer.is_reserved %}
             <li>
                 <strong>Compétence :</strong> {{offer.competence}} <br>
                 <strong>Date :</strong> {{offer.date |date:"d F"}}
                 <button><a href="{% url 'mutual_support:offer' offer.pk %}">Consulter</a></button>
             </li>
+            {% endif %}
             {% endfor %}
+
 
         </ul>
         {% else %}
 
         <ul>
             {% for offer in offers %}
+            {% if offer.is_help_offered and not offer.is_reserved%}
             <li>
                 <strong>Compétence :</strong> {{offer.competence}} <br>
                 <strong>Date :</strong> {{offer.date |date:"d F"}}
             </li>
+            {% endif %}
             {% endfor %}
+
 
         </ul>
         {% endif %}
@@ -72,18 +78,27 @@
         <h3>Demandes d'aide</h3>
         {% if user.is_authenticated %}
         <ul>
+            {% for offer in offers %}
+            {% if not offer.is_help_offered and not offer.is_reserved%}
             <li>
-                <strong>Compétence :</strong> Administration d'ordinateur <br>
-                <strong>Date :</strong> 18 novembre
+                <strong>Compétence :</strong> {{offer.competence}} <br>
+                <strong>Date :</strong> {{offer.date |date:"d F"}}
+                <button><a href="{% url 'mutual_support:offer' offer.pk %}">Consulter</a></button>
             </li>
+            {% endif %}
+            {% endfor %}
 
         </ul>
         {% else %}
-                <ul>
+        <ul>
+            {% for offer in offers %}
+             {% if not offer.is_help_offered and not offer.is_reserved%}
             <li>
-                <strong>Compétence :</strong> Administration d'ordinateur <br>
-                <strong>Date :</strong> 18 novembre
+                <strong>Compétence :</strong> {{offer.competence}} <br>
+                <strong>Date :</strong> {{offer.date |date:"d F"}}
             </li>
+            {% endif %}
+            {% endfor %}
 
         </ul>
         {% endif %}
@@ -101,7 +116,6 @@
 </section>
 
 <p>You are not logged in site</p>
-
 
 
 {% endblock %}
