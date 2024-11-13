@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from mutual_support.forms import CreneauForm
 from mutual_support.models import Competence, Creneau
@@ -49,6 +49,11 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
+
+
+def offer_view(request, creneau_id):
+    offer = get_object_or_404(Creneau, pk=creneau_id)
+    return render(request, 'offer-details.html', {'creneau': offer})
 
 
 def offers_form_view(request):
