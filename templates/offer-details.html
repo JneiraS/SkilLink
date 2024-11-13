@@ -9,7 +9,7 @@
     <form class="creneau-details" method="post">
         <h3>Détails du créneau</h3>
     <p><strong>Date :</strong>{{ creneau.date }}</p>
-    <p><strong>Utilisateur :</strong> {{ creneau.user.username }}</p>
+    <p><strong>Utilisateur :</strong> <a href="{% url 'mutual_support:profile' creneau.user.id %}">{{ creneau.user.username }}</a></p>
     <p><strong>Compétence :</strong> {{ creneau.competence.name }}</p>
     <p><strong>Type :</strong> {% if creneau.is_help_offered %}Offre d'aide{% else %}Demande d'aide{% endif %}</p>
     <p><strong>Description :</strong> {{ creneau.description }}</p>
