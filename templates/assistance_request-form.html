@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+
+
+
+
+{% block content %}
+    <form class="offer-form" method="post">
+        <h3>Demande d'aide</h3>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Poster ma demande</button>
+    </form>
+{% endblock %}
