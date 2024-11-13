@@ -1,9 +1,10 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 
 from mutual_support.forms import CreneauForm
-from mutual_support.models import Competence, Creneau
+from mutual_support.models import Competence, Creneau, UserCompetence, Profile
 
 INDEX_PAGE = 'mutual_support:index'
 
@@ -11,7 +12,6 @@ INDEX_PAGE = 'mutual_support:index'
 def index(request):
     categories = Competence.objects.values_list('category', flat=True).distinct()
     offers = Creneau.objects.all().order_by('date')
-    current_user = request.user
     context = {
         'categories': categories,
         'offers': offers
@@ -39,7 +39,9 @@ def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.save()
+            Profile.objects.create(user=user)  # Création d'un profil par défaut
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
@@ -86,3 +88,12 @@ def assistance_request_view(request):
         form = CreneauForm()
 
     return render(request, 'assistance_request-form.html', {'form': form})  # The form variable is used here
+
+
+def profile_view(request, user_id):
+    user_profile = get_object_or_404(User, pk=user_id)
+    user_competences = UserCompetence.objects.filter(user=user_id)
+
+    context = {'profile_user': user_profile, 'competences': user_competences}
+
+    return render(request, 'profile.html', context)
