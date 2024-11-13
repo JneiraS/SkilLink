@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+<div class="creneau-details">
+    <h2>Détails du créneau</h2>
+    <p><strong>Date :</strong>{{ creneau.date }}</p>
+    <p><strong>Utilisateur :</strong> {{ creneau.user.username }}</p>
+    <p><strong>Compétence :</strong> {{ creneau.competence.name }}</p>
+    <p><strong>Type :</strong> {% if creneau.is_help_offered %}Offre d'aide{% else %}Demande d'aide{% endif %}</p>
+    <p><strong>Description :</strong> {{ creneau.description }}</p>
+</div>
+
+{% endblock %}
