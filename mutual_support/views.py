@@ -68,6 +68,21 @@ def offers_form_view(request):
             form.save()
             return redirect(INDEX_PAGE)
     else:
-        form = CreneauForm()  # This line is not the issue
+        form = CreneauForm()
 
     return render(request, 'offers-form.html', {'form': form})  # The form variable is used here
+
+
+def assistance_request_view(request):
+    if request.method == 'POST':
+        form = CreneauForm(request.POST)
+        if form.is_valid():
+            current_user = request.user
+            form.instance.user = current_user
+            form.instance.is_help_offered = False
+            form.save()
+            return redirect(INDEX_PAGE)
+    else:
+        form = CreneauForm()
+
+    return render(request, 'assistance_request-form.html', {'form': form})  # The form variable is used here
