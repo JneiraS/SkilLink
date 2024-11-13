@@ -207,7 +207,7 @@ form {
   padding: 1rem;
   background-color: var(--pblue);
   border-radius: 1rem;
-  width: 20rem;
+  width: fit-content;
   margin: 0 auto;
   position: absolute;
   top: 50%;
@@ -225,8 +225,8 @@ form input {
   padding: 0.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--lighter-border);
-  background-color: var(--lpblue);
-  color: var(--principal-font);
+  background-color: var(--principal-font);
+  color: var(--gunmetal);
 }
 
 form button {
@@ -305,11 +305,27 @@ form .form-group {
   }
 }
 
-
-
 .categories:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   transition: 0.3s;
   
+}
+
+/*OFFRES*/
+
+.offer-form {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    color: var(--eggshell)
+}
+
+.offer-form textarea, .offer-form select  {
+  padding: .5em;
+  width: 360px;
+  background-color: var(--principal-font);
+  resize: none;
 }
