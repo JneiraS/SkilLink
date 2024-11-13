@@ -3,104 +3,105 @@
 {% block content %}
 
 
-  <!-- En-tête de navigation -->
-  <header>
+<!-- En-tête de navigation -->
+<header>
     <nav>
-      <ul>
-          {% if user.is_authenticated %}
-        <li><a href="/">Accueil</a></li>
-        <li><a href="/competences">Compétences</a></li>
-        <li><a href="{% url 'mutual_support:logout' %}">Déconnexion</a></li>
-        <li><a href="/profile">{{ user.username }}</a></li>
+        <ul>
+            {% if user.is_authenticated %}
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/competences">Compétences</a></li>
+            <li><a href="{% url 'mutual_support:logout' %}">Déconnexion</a></li>
+            <li><a href="/profile">{{ user.username }}</a></li>
 
-          {% else %}
-        <li><a href="/">Accueil</a></li>
-        <li><a href="/competences">Compétences</a></li>
-        <li><a href="{% url 'mutual_support:login' %}">Connexion</a></li>
-          {% endif %}
-      </ul>
+            {% else %}
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/competences">Compétences</a></li>
+            <li><a href="{% url 'mutual_support:login' %}">Connexion</a></li>
+            {% endif %}
+        </ul>
     </nav>
-  </header>
+</header>
 
-  <!-- Section head -->
-  <section class="head">
+<!-- Section head -->
+<section class="head">
     <h1>Votre talent, notre lien. Ensemble, on s’entraide.</h1>
-    <p>Trouvez des personnes près de chez vous pour vous aider avec vos tâches ou proposez vos propres compétences.</p>
+    <p>Trouvez des personnes près de chez vous pour vous aider avec vos tâches ou proposez vos propres
+        compétences.</p>
     <div class="cta-buttons">
-      <a href="/trouver-aide" class="button">Trouver de l'aide</a>
-      <a href="{% url 'mutual_support:offers_form' %}" class="button">Offrir de l'aide</a>
+        <a href="/trouver-aide" class="button">Trouver de l'aide</a>
+        <a href="{% url 'mutual_support:offers_form' %}" class="button">Offrir de l'aide</a>
     </div>
-  </section>
-
-{% if user.is_authenticated %}
+</section>
 
 
-  <!-- Section des créneaux disponibles -->
-  <section class="upcoming-slots">
+<!-- Section des créneaux disponibles -->
+<section class="upcoming-slots">
     <h2>Prochains créneaux disponibles</h2>
 
     <!-- Sous-section des offres d'aide -->
     <div class="help-offers">
-      <h3>Offres d'aide</h3>
+        <h3>Offres d'aide</h3>
 
+        {% if user.is_authenticated %}
+        <ul>
+            {% for offer in offers %}
+            <li>
+                <strong>Compétence :</strong> {{offer.competence}} <br>
+                <strong>Date :</strong> {{offer.date |date:"d F"}}
+                <button><a href="{% url 'mutual_support:offer' creneau.id %}">Consulter</a></button>
+            </li>
+            {% endfor %}
 
+        </ul>
+        {% else %}
 
-      <ul>
-        {% for offer in offers %}
-        <li>
-          <strong>Compétence :</strong> {{offer.competence}} <br>
-          <strong>Date :</strong> {{offer.date |date:"d F"}}
-        </li>
-        {% endfor %}
-        <li>
-          <strong>Compétence :</strong> Réparation de vélo <br>
-          <strong>Date :</strong> 20 novembre
-        </li>
+        <ul>
+            {% for offer in offers %}
+            <li>
+                <strong>Compétence :</strong> {{offer.competence}} <br>
+                <strong>Date :</strong> {{offer.date |date:"d F"}}
+            </li>
+            {% endfor %}
 
-      </ul>
+        </ul>
+        {% endif %}
     </div>
 
     <!-- Sous-section des demandes d'aide -->
     <div class="help-requests">
-      <h3>Demandes d'aide</h3>
-      <ul>
-        <li>
-          <strong>Compétence :</strong> Administration d'ordinateur <br>
-          <strong>Date :</strong> 18 novembre
-        </li>
+        <h3>Demandes d'aide</h3>
+        {% if user.is_authenticated %}
+        <ul>
+            <li>
+                <strong>Compétence :</strong> Administration d'ordinateur <br>
+                <strong>Date :</strong> 18 novembre
+            </li>
 
-      </ul>
+        </ul>
+        {% else %}
+                <ul>
+            <li>
+                <strong>Compétence :</strong> Administration d'ordinateur <br>
+                <strong>Date :</strong> 18 novembre
+            </li>
+
+        </ul>
+        {% endif %}
     </div>
-  </section>
+</section>
 
 <!-- Section des categories -->
 <section class="categories-container">
-  <h3>Categories</h3>
-  <div class="categories-list">
-  {% for category in categories %}
-<div class="categories"><p>{{ category }}</p></div>
-  {% endfor %}
+    <h3>Categories</h3>
+    <div class="categories-list">
+        {% for category in categories %}
+        <div class="categories"><p>{{ category }}</p></div>
+        {% endfor %}
     </div>
 </section>
-
-{% else %}
-
-
-
-<section class="categories-container">
-  <h3>Categories</h3>
-  <div class="categories-list">
-  {% for category in categories %}
-<div class="categories"><p>{{ category }}</p></div>
-  {% endfor %}
-    </div>
-</section>
-
 
 <p>You are not logged in site</p>
 
 
 
-
-{% endif %}
 {% endblock %}
