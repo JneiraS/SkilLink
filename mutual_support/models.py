@@ -2,15 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-# class User(models.Model):
-#     """
-#     Classe pour la gestion des utilisateurs
-#     """
-#     username = models.CharField(max_length=100)
-#     password = models.CharField(max_length=100)
-#     email = models.EmailField()
-
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True, null=True)
