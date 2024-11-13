@@ -12,7 +12,6 @@ def index(request):
     categories = Competence.objects.values_list('category', flat=True).distinct()
     offers = Creneau.objects.all().order_by('date')
     current_user = request.user
-    print(offers[0].competence)
     context = {
         'categories': categories,
         'offers': offers
@@ -53,6 +52,10 @@ def signup(request):
 
 def offer_view(request, creneau_id):
     offer = get_object_or_404(Creneau, pk=creneau_id)
+    if request.method == 'POST':
+        offer.is_reserved = True
+        offer.save()
+        return redirect(INDEX_PAGE)
     return render(request, 'offer-details.html', {'creneau': offer})
 
 
