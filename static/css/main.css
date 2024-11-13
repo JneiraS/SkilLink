@@ -352,3 +352,30 @@ form .form-group {
   
 }
 
+/* PROFILE */
+.profile-container{
+  padding: 2em;
+}
+
+.competences-container {
+ display: flex;
+ flex-direction: row;
+ flex-wrap: wrap;
+margin: 1em;
+gap: 1em;
+
+
+}
+.competences-container p strong{
+  margin: 1em;
+}
+
+.competences-container p {
+ 
+  background-color: #2b6777;
+  color: var(--principal-font);
+  padding: 1em;
+  border-radius: .9px;
+
+
+}
