@@ -28,7 +28,7 @@
     <p>Trouvez des personnes près de chez vous pour vous aider avec vos tâches ou proposez vos propres compétences.</p>
     <div class="cta-buttons">
       <a href="/trouver-aide" class="button">Trouver de l'aide</a>
-      <a href="/offrir-aide" class="button">Offrir de l'aide</a>
+      <a href="{% url 'mutual_support:offers_form' %}" class="button">Offrir de l'aide</a>
     </div>
   </section>
 
@@ -42,11 +42,16 @@
     <!-- Sous-section des offres d'aide -->
     <div class="help-offers">
       <h3>Offres d'aide</h3>
+
+
+
       <ul>
+        {% for offer in offers %}
         <li>
-          <strong>Compétence :</strong> Jardinage <br>
-          <strong>Date :</strong> 15 novembre
+          <strong>Compétence :</strong> {{offer.competence}} <br>
+          <strong>Date :</strong> {{offer.date |date:"d F"}}
         </li>
+        {% endfor %}
         <li>
           <strong>Compétence :</strong> Réparation de vélo <br>
           <strong>Date :</strong> 20 novembre
