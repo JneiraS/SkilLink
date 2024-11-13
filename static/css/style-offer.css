@@ -1,0 +1,37 @@
+.creneau-details {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--principal-font);
+    padding-bottom: 1em;
+    border-radius: 8px;
+    color: var(--gunmetal);
+
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    
+}
+
+.creneau-details p {
+    margin-left: 2em;
+}
+
+
+.creneau-details h3{
+
+    color: var(--gunmetal);
+    margin-bottom: 1em;
+
+    text-align: center;
+    border-radius: 1px var(--eggshell) solid;
+    
+}
+
+.creneau-details strong{
+    color: #181818;
+}
+
