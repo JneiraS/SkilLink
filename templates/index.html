@@ -28,7 +28,7 @@
     <p>Trouvez des personnes près de chez vous pour vous aider avec vos tâches ou proposez vos propres
         compétences.</p>
     <div class="cta-buttons">
-        <a href="/trouver-aide" class="button">Trouver de l'aide</a>
+        <a href="{% url 'mutual_support:request_form' %}" class="button">Trouver de l'aide</a>
         <a href="{% url 'mutual_support:offers_form' %}" class="button">Offrir de l'aide</a>
     </div>
 </section>
@@ -49,7 +49,7 @@
             <li>
                 <strong>Compétence :</strong> {{offer.competence}} <br>
                 <strong>Date :</strong> {{offer.date |date:"d F"}}
-                <button><a href="{% url 'mutual_support:offer' offer.pk %}">Consulter</a></button>
+                <div ><a href="{% url 'mutual_support:offer' offer.pk %}" class="button">Consulter</a></div>
             </li>
             {% endif %}
             {% endfor %}
@@ -83,7 +83,7 @@
             <li>
                 <strong>Compétence :</strong> {{offer.competence}} <br>
                 <strong>Date :</strong> {{offer.date |date:"d F"}}
-                <button><a href="{% url 'mutual_support:offer' offer.pk %}">Consulter</a></button>
+                <div ><a href="{% url 'mutual_support:offer' offer.pk %}" class="button">Consulter</a></div>
             </li>
             {% endif %}
             {% endfor %}
@@ -92,7 +92,7 @@
         {% else %}
         <ul>
             {% for offer in offers %}
-             {% if not offer.is_help_offered and not offer.is_reserved%}
+            {% if not offer.is_help_offered and not offer.is_reserved%}
             <li>
                 <strong>Compétence :</strong> {{offer.competence}} <br>
                 <strong>Date :</strong> {{offer.date |date:"d F"}}
