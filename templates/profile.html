@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="profile-container">
+
+    <p><strong>Nom d'utilisateur :</strong>{{ profile_user.username }}</p>
+    <p><strong>Email :</strong>{{ profile_user.email }}</p>
+    <p><strong>Biographie :</strong>{{ profile_user.profile.bio }}</p>
+
+<p><strong>Compétences :</strong></p>
+<div class="competences-container">
+
+    {% for competence in competences %}
+    <p>{{ competence.competence.name}}</p>
+    {% endfor %}
+</div>
+</div>
+
+{% endblock %}
