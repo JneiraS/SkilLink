@@ -48,7 +48,7 @@
             <li>
                 <strong>Compétence :</strong> {{offer.competence}} <br>
                 <strong>Date :</strong> {{offer.date |date:"d F"}}
-                <button><a href="{% url 'mutual_support:offer' creneau.id %}">Consulter</a></button>
+                <button><a href="{% url 'mutual_support:offer' offer.pk %}">Consulter</a></button>
             </li>
             {% endfor %}
 
