@@ -1,3 +1,5 @@
+@import url("style-offer-form.css");
+
 :root {
   --pblue: #2b6777ff;
   --lpblue: #4b9d9eff;
@@ -312,41 +314,3 @@ form .form-group {
   
 }
 
-/*OFFRES*/
-
-.offer-form {
-  position: absolute;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
-    color: var(--eggshell)
-}
-
-.offer-form label {
-  margin: 0 .5em .5em 0;
-}
-
-
-.offer-form h3{
-  text-align: center;
-  font-weight: 100;
-  background-color: var(--midnight-green);
-  border-radius: 8px;
-  padding: 0.2em 2em;
-  opacity: 75%;
-}
-
-.offer-form textarea, .offer-form select  {
-  padding: .5em;
-  margin-top: .5em;
-  width: 360px;
-  background-color: var(--principal-font);
-  resize: none;
-}
-
-
-#offer-form-container {
-  background-color: #24a5c9;
-}
