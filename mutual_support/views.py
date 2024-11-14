@@ -115,3 +115,9 @@ def category_view(request, category_slug):
     offers = Creneau.objects.filter(competence__category=category).order_by('date')
     context = {'offers': offers, 'category': category}
     return render(request, 'categories.html', context)
+
+
+def competences(request):
+    competences = Competence.objects.all()
+    print(competences[0].name)
+    return render(request, 'competences.html', {'competences': competences})
