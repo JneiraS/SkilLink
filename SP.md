@@ -46,3 +46,19 @@
   Lorsque l'utilisateur trouve un créneau qui l'intéresse, il peut le réserver :
     - Le champ `is_reserved` du `Creneau` est mis à `True`.
     - Les informations de contact des deux utilisateurs sont affichées pour qu'ils puissent organiser l'activité.
+ 
+
+# Relations principales :
+
+## [User] 1--1 [Profile]
+Chaque `User` est associé à un unique `Profile` et vice-versa.
+
+## [Profile] *--* [UserCompetence]
+Un `Profile` peut être lié à plusieurs `UserCompetence` pour indiquer toutes les compétences qu'il offre ou recherche.
+
+## [UserCompetence] *--1 [Competence]
+Chaque `UserCompetence` est associé à une seule `Competence`, mais une compétence peut être recherchée ou offerte par plusieurs `UserCompetence`.
+
+## [Profile] *--* [Creneau]
+Un `Profile` peut avoir plusieurs `Creneau` pour gérer ses créneaux de disponibilité.
+
