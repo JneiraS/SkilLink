@@ -1,0 +1,10 @@
+{% extends "index.html" %}
+
+{% block title %} <title>Liste des competences</title> {% endblock %}
+
+{% block content %}
+
+{% for competence in competences %}
+    <p>{{ competence.name }}</p>
+{% endfor %}
+{% endblock %}
