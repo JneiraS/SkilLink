@@ -2,19 +2,35 @@
 
 {% block content %}
 
+
 <div class="profile-container">
 
     <p><strong>Nom d'utilisateur :</strong>{{ profile_user.username }}</p>
     <p><strong>Email :</strong>{{ profile_user.email }}</p>
     <p><strong>Biographie :</strong>{{ profile_user.profile.bio }}</p>
 
-<p id = "competences"><strong>Compétences :</strong></p>
-<div class="competences-container">
+    <p id="competences"><strong>Compétences :</strong></p>
+    <div class="competences-container">
 
-    {% for competence in competences %}
-    <p>{{ competence.competence.name}}</p>
-    {% endfor %}
-</div>
+        {% for competence in competences %}
+        <p>{{ competence.competence.name}}</p>
+        {% endfor %}
+
+
+    </div>
+    <div class="interesting-requests-cta">
+        <strong>Vous pouvez aider:</strong>
+
+        {% for request in interesting_requests %}
+        {% if not request.is_help_offered and not request.is_reserved%}
+        <div><a href="{% url 'mutual_support:offer' request.pk %}" >
+        <p><strong>Utilisateur :</strong>{{ request.user.username}}</p>
+        <p><strong>Recherche une aide :</strong>{{ request.competence.name}}</p>
+        <p><strong>Le :</strong>{{ request.date}}</p>
+        </a></div>
+        {% endif %}
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}
