@@ -170,8 +170,6 @@ nav ul li a:hover {
 }
 
 
-
-
 /* Footer */
 footer {
   background-color: #2b6777;
@@ -273,11 +271,11 @@ form button:hover {
   transition: 0.3s;
 }
 
-form .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
+#signup{
+  color: var(--principal-font);
+  text-align: center;
 }
+
 
 /*CATEGORIES*/
 .categories-container {
@@ -324,11 +322,15 @@ form .form-group {
   transition: 0.6s;
 
 }
-
+.categories a {
+  color: var(--principal-font);
+}
 
 .categories:hover {
-  color: var(--dark-goldenrod);
+  color: var(--pblue);
 }
+
+
 
 @media (max-width: 768px) {
   .categories {
@@ -371,11 +373,21 @@ gap: 1em;
 }
 
 .competences-container p {
- 
+  border-radius: 5px;
   background-color: #2b6777;
   color: var(--principal-font);
   padding: 1em;
   border-radius: .9px;
+}
 
+.interesting-requests-cta div{
+  opacity: 90%;
+background-color: #2b6777;
 
+padding: 1em;
+margin: .6em;
+border-radius: 5px;
+}
+.interesting-requests-cta div a { 
+  color: var(--principal-font);
 }
