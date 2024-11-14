@@ -1,5 +1,7 @@
 @import url("style-offer.css");
 @import url("style-offer-form.css");
+@import url("style-category.css");
+
 
 :root {
   --pblue: #2b6777ff;

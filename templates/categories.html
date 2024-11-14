@@ -1,5 +1,74 @@
 {% extends "index.html" %}
 
 {% block content %}
-{{ offers}}
+
+<h1 id="cat-title">Toutes les annonces dans la Catégorie : {{ category|capfirst }}</h1>
+<section class="upcoming-slots">
+    <div class="help-offers">
+        <h3>Offres d'aide</h3>
+
+        {% if user.is_authenticated %}
+        <ul>
+            {% for offer in offers %}
+            {% if offer.is_help_offered and not offer.is_reserved %}
+            <li>
+                <strong>Compétence :</strong> {{offer.competence}} <br>
+                <strong>Date :</strong> {{offer.date |date:"d F"}}
+                <div ><a href="{% url 'mutual_support:offer' offer.pk %}" class="button">Consulter</a></div>
+            </li>
+            {% endif %}
+            {% endfor %}
+
+
+        </ul>
+        {% else %}
+
+        <ul>
+            {% for offer in offers %}
+            {% if offer.is_help_offered and not offer.is_reserved%}
+            <li>
+                <strong>Compétence :</strong> {{offer.competence}} <br>
+                <strong>Date :</strong> {{offer.date |date:"d F"}}
+            </li>
+            {% endif %}
+            {% endfor %}
+
+
+        </ul>
+        {% endif %}
+    </div>
+
+
+
+ <div class="help-requests">
+        <h3>Demandes d'aide</h3>
+        {% if user.is_authenticated %}
+        <ul>
+            {% for offer in offers %}
+            {% if not offer.is_help_offered and not offer.is_reserved%}
+            <li>
+                <strong>Compétence :</strong> {{offer.competence}} <br>
+                <strong>Date :</strong> {{offer.date |date:"d F"}}
+                <div ><a href="{% url 'mutual_support:offer' offer.pk %}" class="button">Consulter</a></div>
+            </li>
+            {% endif %}
+            {% endfor %}
+
+        </ul>
+        {% else %}
+        <ul>
+            {% for offer in offers %}
+            {% if not offer.is_help_offered and not offer.is_reserved%}
+            <li>
+                <strong>Compétence :</strong> {{offer.competence}} <br>
+                <strong>Date :</strong> {{offer.date |date:"d F"}}<br>
+                <strong>Description :</strong> {{offer.description}}
+            </li>
+            {% endif %}
+            {% endfor %}
+
+        </ul>
+        {% endif %}
+    </div>
+</section>
 {% endblock %}
