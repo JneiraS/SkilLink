@@ -11,6 +11,9 @@ INDEX_PAGE = 'mutual_support:index'
 
 
 def index(request):
+    """vue pour la page d'accueil qui affiche une liste de categories
+    distinctes et toutes les offres disponibles, triées par date.
+    """
     categories = Competence.objects.values_list('category', flat=True).distinct()
     offers = Creneau.objects.all().order_by('date')
     context = {
@@ -37,19 +40,28 @@ def logout_view(request):
 
 
 def signup(request):
+    """ Vue pour la page de formulaire d'inscription.
+    avec création d'un profil vide associé."""
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
-            Profile.objects.create(user=user)  # Création d'un profil par défaut
+            # Création d'un nouveau profil pour l'utilisateur avec des valeurs par défaut
+            Profile.objects.create(user=user)
+            # Extraction du nom d'utilisateur et du mot de passe de la donnée nettoyée du formulaire
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
+            # Authentification de l'utilisateur avec le nom d'utilisateur et le mot de passe fournis
             user = authenticate(username=username, password=raw_password)
+
             login(request, user)
+
             return redirect(INDEX_PAGE)
     else:
+
         form = UserCreationForm()
+
     return render(request, 'signup.html', {'form': form})
 
 
@@ -99,7 +111,6 @@ def profile_view(request, user_id):
     user_competences = UserCompetence.objects.filter(user=user_id)
     interesting_requests = Creneau.objects.filter(
         competence__in=user_competences.values_list('competence', flat=True))
-
 
     context = {'profile_user': user_profile, 'competences': user_competences,
                "interesting_requests": interesting_requests}
