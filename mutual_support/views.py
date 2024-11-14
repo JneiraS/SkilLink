@@ -86,7 +86,8 @@ def offers_form_view(request):
     else:
         form = CreneauForm()
 
-    return render(request, 'offers-form.html', {'form': form})  # The form variable is used here
+    # The form variable is used hereafter
+    return render(request, 'offers-form.html', {'form': form})
 
 
 @login_required(login_url="/login/")
@@ -129,6 +130,6 @@ def category_view(request, category_slug):
 
 
 def competences(request):
-    competences = Competence.objects.all()
-    print(competences[0].name)
-    return render(request, 'competences.html', {'competences': competences})
+    competences_list = Competence.objects.all()
+    print(competences_list[0].name)
+    return render(request, 'competences.html', {'competences': competences_list})
