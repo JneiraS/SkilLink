@@ -97,3 +97,13 @@ def profile_view(request, user_id):
     context = {'profile_user': user_profile, 'competences': user_competences}
 
     return render(request, 'profile.html', context)
+
+
+def category_view(request, category_slug):
+    """
+    Vue qui affiche les offres pour une catégorie spécifique.
+    """
+    category = category_slug.replace('-', ' ').strip()
+    offers = Creneau.objects.filter(competence__category=category).order_by('date')
+    context = {'offers': offers, 'category': category}
+    return render(request, 'categories.html', context)
