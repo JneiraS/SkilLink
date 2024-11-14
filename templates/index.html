@@ -110,7 +110,7 @@
     <h3>Categories</h3>
     <div class="categories-list">
         {% for category in categories %}
-        <div class="categories"><p>{{ category }}</p></div>
+        <div class="categories"><a href="{% url 'mutual_support:category' category|slugify %}">{{ category }}</a></div>
         {% endfor %}
     </div>
 </section>
