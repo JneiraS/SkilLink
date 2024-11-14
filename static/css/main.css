@@ -123,7 +123,7 @@ nav ul li a:hover {
   transition: all .4s;
 }
 
-/* Upcoming Slots Section */
+/* créneaux à venir Section */
 .upcoming-slots {
   padding: 2em;
   max-width: 900px;
@@ -171,36 +171,6 @@ nav ul li a:hover {
 
 }
 
-
-/* Footer */
-footer {
-  background-color: #2b6777;
-  color: var(--principal-font);
-  padding: 1.5em 0;
-  text-align: center;
-}
-
-footer p {
-  margin-bottom: 0.5em;
-}
-
-footer ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 1.5em;
-}
-
-footer ul li a {
-  color: var(--yell);
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-footer ul li a:hover {
-  color: #f4a261;
-}
 
 /* Animations */
 @keyframes fadeIn {
@@ -328,11 +298,6 @@ form button:hover {
   color: var(--principal-font);
 }
 
-.categories:hover {
-  color: var(--pblue);
-}
-
-
 
 @media (max-width: 768px) {
   .categories {
@@ -379,7 +344,6 @@ gap: 1em;
   background-color: #2b6777;
   color: var(--principal-font);
   padding: 1em;
-  border-radius: .9px;
 }
 
 .interesting-requests-cta div{
