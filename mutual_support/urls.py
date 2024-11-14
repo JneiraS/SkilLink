@@ -12,4 +12,5 @@ urlpatterns = [
     path('request-form/', views.assistance_request_view, name='request_form'),
     path('offer/<int:creneau_id>/', views.offer_view, name='offer'),
     path('profile/<int:user_id>', views.profile_view, name='profile'),
+    path('category/<slug:category_slug>/', views.category_view, name='category'),
 ]
