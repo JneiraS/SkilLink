@@ -357,3 +357,37 @@ border-radius: 5px;
 .interesting-requests-cta div a { 
   color: var(--principal-font);
 }
+
+
+/*COMPETENCES*/
+.competences-cta_  {
+  position: relative;
+  width: fit-content;
+  overflow-x: hidden;
+  padding: 1em;
+  display: flex;
+  gap: 1em;
+}
+
+.competence-item {
+  display: inline-flex;
+  align-items: center;
+  color: var(--eggshell);
+  opacity: 90%;
+  text-align: center;
+  padding: .8em 1.5em;
+  background-color: var(--midnight-green);
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.competences-cta_ {
+  animation: scrollCompetences 500s linear infinite;
+}
+
+/* Cette animation fait défiler les compétences de gauche à droite */
+@keyframes scrollCompetences {
+  0% { transform: translateX(0); } /* Début de l'animation, pas de déplacement */
+  100% { transform: translateX(-100%); } /* Fin de l'animation, déplacement de 50% vers la gauche */
+}

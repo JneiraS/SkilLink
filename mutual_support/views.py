@@ -16,9 +16,12 @@ def index(request):
     """
     categories = Competence.objects.values_list('category', flat=True).distinct()
     offers = Creneau.objects.all().order_by('date')
+    index_competences = Competence.objects.all()
     context = {
         'categories': categories,
-        'offers': offers
+        'offers': offers,
+        'competences': index_competences
+
     }
     return render(request, 'index.html', context)
 
@@ -130,5 +133,4 @@ def category_view(request, category_slug):
 
 def competences(request):
     competences = Competence.objects.all()
-    print(competences[0].name)
     return render(request, 'competences.html', {'competences': competences})

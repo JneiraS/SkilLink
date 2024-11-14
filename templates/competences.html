@@ -3,8 +3,9 @@
 {% block title %} <title>Liste des competences</title> {% endblock %}
 
 {% block content %}
-
+<div class = "competences-cta">
 {% for competence in competences %}
-    <p>{{ competence.name }}</p>
+    <div class = "competence-item"><p>{{ competence.name }}</p></div>
 {% endfor %}
+    </div>
 {% endblock %}
