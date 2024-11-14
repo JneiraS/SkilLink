@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
@@ -60,7 +61,7 @@ def offer_view(request, creneau_id):
         return redirect(INDEX_PAGE)
     return render(request, 'offer-details.html', {'creneau': offer})
 
-
+@login_required(login_url="/login/")
 def offers_form_view(request):
     if request.method == 'POST':
         form = CreneauForm(request.POST)
@@ -74,7 +75,7 @@ def offers_form_view(request):
 
     return render(request, 'offers-form.html', {'form': form})  # The form variable is used here
 
-
+@login_required(login_url="/login/")
 def assistance_request_view(request):
     if request.method == 'POST':
         form = CreneauForm(request.POST)
@@ -89,12 +90,15 @@ def assistance_request_view(request):
 
     return render(request, 'assistance_request-form.html', {'form': form})  # The form variable is used here
 
-
+@login_required(login_url="/login/")
 def profile_view(request, user_id):
     user_profile = get_object_or_404(User, pk=user_id)
     user_competences = UserCompetence.objects.filter(user=user_id)
+    interesting_requests = Creneau.objects.filter(competence__in=user_competences.values_list('competence', flat=True))
+    print(interesting_requests[0].user.username)
 
-    context = {'profile_user': user_profile, 'competences': user_competences}
+    context = {'profile_user': user_profile, 'competences': user_competences,
+               "interesting_requests":  interesting_requests}
 
     return render(request, 'profile.html', context)
 
