@@ -366,8 +366,8 @@ gap: 1em;
 
 
 }
-.competences-container p strong{
-  margin: 1em;
+#competences{
+  margin-top: 2em;
 }
 
 .competences-container p {
