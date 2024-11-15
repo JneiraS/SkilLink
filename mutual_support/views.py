@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from mutual_support.forms import CreneauForm
@@ -139,3 +140,4 @@ def category_view(request, category_slug):
 def competences(request):
     competences = Competence.objects.all()
     return render(request, 'competences.html', {'competences': competences})
+
