@@ -14,6 +14,7 @@
   --syracuse-red-orange: #cc4a0eff;
   --eggshell: #eee9d6;
   --gunmetal: #3f3f3f;
+  --gunmetal25: rgba(64, 64, 64, 0.25);
   --midnight-green: #013340ff;
   --apple-green: #869a00ff;
   --medium-slate-blue: #6c72c5ff;
@@ -28,7 +29,7 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  color: #333;
+  color: var(--gunmetal);
   line-height: 1.6;
   background-color: var(--eggshell);
 }
@@ -45,6 +46,7 @@ header {
   background-color: var(--midnight-green);
   padding: 1em 2em;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ 
 }
 
 nav ul {
@@ -68,6 +70,10 @@ nav ul li a:hover {
   color: var(--dark-goldenrod);
 }
 
+a {
+  color: var(--gunmetal);
+}
+
 /* main Section */
 .head {
   display: flex;
@@ -81,6 +87,7 @@ nav ul li a:hover {
   );
   color: var(--principal-font);
   text-align: center;
+
 }
 
 .head h1 {
@@ -102,7 +109,8 @@ nav ul li a:hover {
 
 .cta-buttons .button,
 .upcoming-slots .button{
-
+  opacity: 100%;
+  bottom: 1.5em;
   padding: 0.8em 2em;
   font-size: 1rem;
   color: var(--principal-font);
@@ -144,11 +152,24 @@ nav ul li a:hover {
 
 .upcoming-slots ul li {
   background-color: var(--principal-font);
+  height: 7.5em;
   padding: 1.5em;
   margin-bottom: 1em;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/*---- Utilisateur ----*/
+.upcoming-slots ul li a {
+  opacity: 50%;
+  font-size: 1rem;
+  border: 1px solid var(--gunmetal25);
+  background-color: var(--gunmetal);
+  color: var(--principal-font);
+  border-radius: 5px;
+  padding: 0.2em 1em;
+  margin-left: 0.5em;
 }
 
 .upcoming-slots ul li:hover {
