@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 
 from mutual_support.forms import CreneauForm
@@ -14,13 +15,12 @@ def index(request):
     """vue pour la page d'accueil qui affiche une liste de categories
     distinctes et toutes les offres disponibles, triées par date.
     """
+    current_user_id = request.user.id
     categories = Competence.objects.values_list('category', flat=True).distinct()
-    offers = Creneau.objects.all().order_by('date')
-    index_competences = Competence.objects.all()
+    offers = Creneau.objects.filter(~Q(user=current_user_id)).order_by('date')
     context = {
         'categories': categories,
         'offers': offers,
-        'competences': index_competences
 
     }
     return render(request, 'index.html', context)
