@@ -3,13 +3,83 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    <h2>Login</h2>
-    <input type="text" name="username" placeholder="Nom d'utilisateur">
-    <input type="password" name="password" placeholder="Mot de passe">
-    <button type="submit">Se connecter</button>
-    <a id="signup" href="{% url 'mutual_support:signup' %}">Créer un compte</a>
-</form>
 
-{% endblock %}
+<!-- En-tête de navigation -->
+<header>
+    <nav>
+        <ul>
+
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/competences">Compétences</a></li>
+            <li><a href="/login/">Connexion</a></li>
+
+        </ul>
+    </nav>
+</header>
+
+
+<!-- Section head -->
+<section class="head_">
+    <h1>Votre talent, notre lien. Ensemble, on s’entraide.</h1>
+    <p>Trouvez des personnes près de chez vous pour vous aider avec vos tâches ou proposez vos propres
+        compétences.</p>
+    <div class="cta-buttons">
+        <a href="/request-form/" class="button">Trouver de l'aide</a>
+        <a href="/offers-form/" class="button">Offrir de l'aide</a>
+    </div>
+</section>
+
+
+<!-- Section des créneaux disponibles -->
+<section class="upcoming-slots">
+    <h2>Prochains créneaux disponibles</h2>
+
+    <!-- Sous-section des offres d'aide -->
+    <div class="help-offers">
+        <h3>Offres d'aide</h3>
+
+
+        <ul>
+
+
+            <li>
+                <strong>Compétence :</strong> Yoga et pilates <br>
+                <strong>Date :</strong> 15 novembre
+
+            </li>
+
+
+            <li>
+                <strong>Compétence :</strong> Programmation (Python, Java, C++, etc.) <br>
+                <strong>Date :</strong> 23 novembre
+
+            </li>
+
+
+        </ul>
+
+    </div>
+
+    <!-- Sous-section des demandes d'aide -->
+    <div class="help-requests">
+        <h3>Demandes d'aide</h3>
+
+        <ul>
+        </ul>
+
+    </div>
+    <div class="login-cta">
+
+        <form method="post">
+            {% csrf_token %}
+            <h2>Login</h2>
+            <input type="text" name="username" placeholder="Nom d'utilisateur">
+            <input type="password" name="password" placeholder="Mot de passe">
+            <button type="submit">Se connecter</button>
+            <a id="signup" href="{% url 'mutual_support:signup' %}">Créer un compte</a>
+            <p>{{ error_message }}</p>
+            <a id="retunr" href="{% url 'mutual_support:index' %}">Retour</a>
+        </form>
+
+    </div>
+    {% endblock %}
