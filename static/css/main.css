@@ -1,6 +1,7 @@
 @import url("style-offer.css");
 @import url("style-offer-form.css");
 @import url("style-category.css");
+@import url("style-login_page.css");
 
 
 :root {
@@ -75,7 +76,7 @@ a {
 }
 
 /* main Section */
-.head {
+.head, .head_ {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -384,7 +385,6 @@ border-radius: 5px;
 /*COMPETENCES*/
 .competences-cta {
   display: grid;
-  padding: .5em;
   grid-template:  repeat(1, 1fr) / repeat(4, 1fr);
   gap: 1em;
   padding: 1em;}

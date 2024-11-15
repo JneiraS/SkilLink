@@ -30,11 +30,16 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=username.strip(), password=password)
         if user is not None:
             login(request, user)
             return redirect(INDEX_PAGE)
-    return render(request, 'login.html')
+        else:
+            error_message = "Nom d'utilisateur ou mot de passe incorrect"
+    else:
+        error_message = ""
+
+    return render(request, 'login.html', {'error_message': error_message})
 
 
 def logout_view(request):
