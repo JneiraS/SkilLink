@@ -9,7 +9,7 @@ class APImanager(ABC):
         pass
 
     @abstractmethod
-    def _fetch_data(self):
+    def fetch_data(self):
         """
         Returns data from the API response.
         The content of the returned data depends on the API.
@@ -26,7 +26,7 @@ class WeatherAPI(APImanager):
         self.city = city
         self.api_key = api_key
 
-    def _fetch_data(self):
+    def fetch_data(self):
         """
         Effectue une requête sur l'API OpenWeatherMap pour obtenir
         les prévisions métoreologiques pour la ville spécifiée.
@@ -46,12 +46,12 @@ class WeatherAPI(APImanager):
             response.raise_for_status()
             return response.json()
 
-    def get_rainy_days(self):
+    @staticmethod
+    def get_rainy_days(data) -> set:
         """
         Renvoie un ensemble de dates au format 'AAAA-MM-JJ' pour lesquelles il est prévu de la pluie.
         Les dates sont extraites de la réponse de l'API OpenWeatherMap.
         """
-        data = self._fetch_data()
         return set([c['dt_txt'][:10] for c in data['list'] if c['weather'][0]['main'] == 'Rain'])
 
 
