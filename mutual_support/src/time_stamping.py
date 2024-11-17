@@ -5,7 +5,9 @@ from mutual_support.src.api import APImanager
 
 
 class TimeStamp(ABC):
-    pass
+
+    def __init__(self):
+        self.stamp = datetime.now()
 
     @abstractmethod
     def is_expired(self):
@@ -21,7 +23,7 @@ class APITimestamp(TimeStamp):
     Classe permettant de gérer l'horodatage d'une API.
     """
     def __init__(self, api_manager: APImanager):
-        self.stamp = datetime.now()
+        super().__init__()
         self.api_manager = api_manager
         self.data = self.api_manager.fetch_data()
 
@@ -35,4 +37,6 @@ class APITimestamp(TimeStamp):
         """
         if self.is_expired():
             self.data = self.api_manager.fetch_data()
+            self.stamp = datetime.now()
+            print("Données de l'API mises à jour.")
         return self.data
