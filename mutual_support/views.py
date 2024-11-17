@@ -3,26 +3,35 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.db.models import Q
-from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from mutual_support.forms import CreneauForm
 from mutual_support.models import Competence, Creneau, UserCompetence, Profile
+from mutual_support.src.api import WeatherAPI
+from mutual_support.src.time_stamping import APITimestamp
 
 INDEX_PAGE = 'mutual_support:index'
+api_data = WeatherAPI('Soustons', '111a7cf74496e5693e3fcd124fb4947d')
+stamp = APITimestamp(api_data)
 
 
 def index(request):
     """vue pour la page d'accueil qui affiche une liste de categories
     distinctes et toutes les offres disponibles, triées par date.
     """
+    rainy_days = WeatherAPI.get_rainy_days(stamp.get_data())
     current_user_id = request.user.id
     categories = Competence.objects.values_list('category', flat=True).distinct()
     offers = Creneau.objects.filter(~Q(user=current_user_id)).order_by('date')
+
+    for offer in offers:
+        if str(offer.date) in rainy_days:
+            offer.is_rainy = True
+
     context = {
         'categories': categories,
         'offers': offers,
-
+        'rainy_days': rainy_days,
     }
     return render(request, 'index.html', context)
 
@@ -140,4 +149,3 @@ def category_view(request, category_slug):
 def competences(request):
     competences = Competence.objects.all()
     return render(request, 'competences.html', {'competences': competences})
-
