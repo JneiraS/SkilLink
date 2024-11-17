@@ -55,9 +55,11 @@
                 {% if offer.is_rainy %}
                 <img src="{% static 'icons/rain.png' %}" alt="icon de pluie" class="icon-rain"
                      style="max-width: 64px;"><br>
-                {% endif %}
+                    <a href="{% url 'mutual_support:offer' offer.pk %}" class="rbutton">Consulter</a>
+                {%else %}
 
                 <a href="{% url 'mutual_support:offer' offer.pk %}" class="button">Consulter</a>
+                {% endif %}
             </li>
             {% endif %}
             {% endfor %}
