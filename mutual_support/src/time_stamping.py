@@ -22,6 +22,9 @@ class APITimestamp(TimeStamp):
     """
     Classe permettant de gérer l'horodatage d'une API.
     """
+
+    EXPIRATION_HOURS = 6
+
     def __init__(self, api_manager: APImanager):
         super().__init__()
         self.api_manager = api_manager
