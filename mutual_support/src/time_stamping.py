@@ -29,7 +29,7 @@ class APITimestamp(TimeStamp):
 
     def is_expired(self) -> bool:
         current_time = datetime.now()
-        return (current_time - self.stamp) > timedelta(minutes=10)
+        return (current_time - self.stamp) > timedelta(hours=6)
 
     def get_data(self) -> dict:
         """
