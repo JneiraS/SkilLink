@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block header %}
 <!-- En-tête de navigation -->
@@ -49,13 +50,14 @@
             <li>
                 <strong>Compétence :</strong> {{offer.competence}} <br>
                 <strong>Date :</strong> {{offer.date |date:"d F"}}<br>
-                <strong>Proposé par :</strong><a href="{% url 'mutual_support:profile' offer.user.id %}">{{offer.user.username}}</a>
+                <strong>Proposé par :</strong><a href="{% url 'mutual_support:profile' offer.user.id %}">{{offer.user.username}}</a><br>
 
                 {% if offer.is_rainy %}
-                <p>Fort risque de pluie</p>
+                <img src="{% static 'icons/rain.png' %}" alt="icon de pluie" class="icon-rain"
+                     style="max-width: 64px;"><br>
                 {% endif %}
 
-                <div><a href="{% url 'mutual_support:offer' offer.pk %}" class="button">Consulter</a></div>
+                <a href="{% url 'mutual_support:offer' offer.pk %}" class="button">Consulter</a>
             </li>
             {% endif %}
             {% endfor %}
@@ -89,14 +91,15 @@
             <li>
 
                 <strong>Compétence :</strong> {{offer.competence}} <br>
-                {{offer.date |date:"d F"}}
                 <strong>Date :</strong> {{offer.date |date:"d F"}}<br>
-                <strong>Proposé par : </strong><a href="{% url 'mutual_support:profile' offer.user.id %}">{{offer.user.username}}</a>
+                <strong>Proposé par : </strong><a href="{% url 'mutual_support:profile' offer.user.id %}">{{offer.user.username}}</a><br>
                 {% if offer.is_rainy %}
-                <p>Fort risque de pluie</p>
-                {% endif %}
-                <div
-                ><a href="{% url 'mutual_support:offer' offer.pk %}" class="button">Consulter</a></div>
+                <img src="{% static 'icons/rain.png' %}" alt="icon de pluie" class="icon-rain"
+                     style="max-width: 64px;"><br>
+                <a href="{% url 'mutual_support:offer' offer.pk %}" class="rbutton">Consulterr</a>
+                {%else %}
+                <a href="{% url 'mutual_support:offer' offer.pk %}" class="button">Consulterr</a>
+{% endif %}
             </li>
             {% endif %}
             {% endfor %}
@@ -112,8 +115,8 @@
             </li>
             {% endif %}
             {% endfor %}
-
         </ul>
+
         {% endif %}
     </div>
 </section>
