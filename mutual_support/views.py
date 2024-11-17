@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 from django.shortcuts import render, redirect, get_object_or_404
 
 from mutual_support.forms import CreneauForm
@@ -19,14 +19,11 @@ def index(request):
     """vue pour la page d'accueil qui affiche une liste de categories
     distinctes et toutes les offres disponibles, triées par date.
     """
-    rainy_days = WeatherAPI.get_rainy_days(stamp.get_data())
-    current_user_id = request.user.id
-    categories = Competence.objects.values_list('category', flat=True).distinct()
-    offers = Creneau.objects.filter(~Q(user=current_user_id)).order_by('date')
+    rainy_days: set = WeatherAPI.get_rainy_days(stamp.get_data())
+    offers = Creneau.objects.filter(~Q(user=request.user.id)).order_by('date')
+    categories: QuerySet = Competence.objects.values_list('category', flat=True).distinct()
 
-    for offer in offers:
-        if str(offer.date) in rainy_days:
-            offer.is_rainy = True
+    Creneau.set_rainy_status(offers, rainy_days)
 
     context = {
         'categories': categories,
