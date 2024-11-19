@@ -8,10 +8,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from mutual_support.forms import CreneauForm
 from mutual_support.models import Competence, Creneau, UserCompetence, Profile
 from mutual_support.src.api import WeatherAPI
+from mutual_support.src.conf_reader import TomlConfReader, ConfReader
 from mutual_support.src.time_stamping import APITimestamp
 
 INDEX_PAGE = 'mutual_support:index'
-api_data = WeatherAPI('Soustons', '111a7cf74496e5693e3fcd124fb4947d')
+toml_reader = TomlConfReader()
+api_data = WeatherAPI('Soustons', toml_reader.api_key('./conf.toml'))
 stamp = APITimestamp(api_data)
 
 
