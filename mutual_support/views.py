@@ -101,7 +101,7 @@ def offers_form_view(request):
     else:
         form = CreneauForm()
 
-    return render(request, 'offers-form.html', {'form': form})  # The form variable is used here
+    return render(request, 'offers-form.html', {'form': form})
 
 
 @login_required(login_url="/login/")
@@ -117,7 +117,7 @@ def assistance_request_view(request):
     else:
         form = CreneauForm()
 
-    return render(request, 'assistance_request-form.html', {'form': form})  # The form variable is used here
+    return render(request, 'assistance_request-form.html', {'form': form})
 
 
 @login_required(login_url="/login/")
