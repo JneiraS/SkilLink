@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import QuerySet
 
 
 class Profile(models.Model):
@@ -27,6 +28,19 @@ class Creneau(models.Model):
     description = models.TextField(blank=True,
                                    null=True)
     is_reserved = models.BooleanField(default=False)
+
+    @staticmethod
+    def set_rainy_status(offers: QuerySet, rainy_days: set):
+        """
+        Modifie les attributs `is_rainy` des créneaux pour indiquer si
+        leur date correspond à une journée pluvieuse.
+
+        :param offers: liste de créneaux
+        :param rainy_days: ensemble de dates (string au format 'AAAA-MM-JJ')
+        """
+        for offer in offers:
+            if str(offer.date) in rainy_days:
+                offer.is_rainy = True
 
 
 class UserCompetence(models.Model):

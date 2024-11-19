@@ -14,4 +14,5 @@ urlpatterns = [
     path('profile/<int:user_id>', views.profile_view, name='profile'),
     path('category/<slug:category_slug>/', views.category_view, name='category'),
     path('competences/', views.competences, name='competences'),
+
 ]

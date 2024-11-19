@@ -109,7 +109,8 @@ a {
 }
 
 .cta-buttons .button,
-.upcoming-slots .button{
+.upcoming-slots .button,
+.upcoming-slots .rbutton{
   opacity: 100%;
   bottom: 1.5em;
   padding: 0.8em 2em;
@@ -124,8 +125,10 @@ a {
 }
 
 .cta-buttons .button:hover,
-.upcoming-slots .button:hover 
+.upcoming-slots .button:hover ,
+.upcoming-slots .rbutton:hover
 {
+
   background-color: var(--syracuse-red-orange);
   color: var(--principal-font);
   transform: translateY(-2px);
@@ -153,7 +156,7 @@ a {
 
 .upcoming-slots ul li {
   background-color: var(--principal-font);
-  height: 7.5em;
+  height: 8.6em;
   padding: 1.5em;
   margin-bottom: 1em;
   border-radius: 8px;
@@ -182,15 +185,29 @@ a {
   color: #2b6777;
 }
 
-.upcoming-slots .button {
+.upcoming-slots .button,
+.upcoming-slots .rbutton{
+background-color: var(--yell);
   position: relative;
-  background-color: var(--yell);
   color: var(--pblue);
   text-align: center;
   width: fit-content;
   padding: .2em .8em;
   left: 87.5%;
+}
 
+
+.upcoming-slots .rbutton{
+top: -100%;
+
+}
+
+
+.icon-rain{
+position: relative;
+top: 0;
+left: 91%;
+top: -95%;
 }
 
 
@@ -326,7 +343,8 @@ form button:hover {
   .categories {
     width: calc(100% / 4);
   }
-  .upcoming-slots .button {
+  .upcoming-slots .button,
+   .upcoming-slots .rbutton {
     left: 80%;
   }
 }
@@ -335,7 +353,14 @@ form button:hover {
   .categories {
     width: calc(100% );
   }
-}
+    .upcoming-slots .button,
+   .upcoming-slots .rbutton {
+    left: 70%;
+  }
+  .icon-rain{
+    left: 80%;}
+  }
+
 
 .categories:hover {
   transform: translateY(-3px);
@@ -399,9 +424,9 @@ border-radius: 5px;
   }
 
 .competence-item {
-  display: flex; /* changed to flex for better alignment */
+  display: flex;
   align-items: center;
-  justify-content: center; /* ensures content is centered */
+  justify-content: center;
   color: var(--eggshell);
   opacity: 85%;
   text-align: center;
@@ -409,9 +434,9 @@ border-radius: 5px;
   background-color: var(--midnight-green);
   white-space: nowrap;
   border-radius: .5em;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* improved transitions */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* deeper shadow for better contrast */
-  flex-shrink: 0; /* prevents items from shrinking */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
 }
 
 

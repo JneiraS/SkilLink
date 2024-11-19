@@ -2,26 +2,35 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 from django.shortcuts import render, redirect, get_object_or_404
 
 from mutual_support.forms import CreneauForm
 from mutual_support.models import Competence, Creneau, UserCompetence, Profile
+from mutual_support.src.api import WeatherAPI
+from mutual_support.src.conf_reader import TomlConfReader, ConfReader
+from mutual_support.src.time_stamping import APITimestamp
 
 INDEX_PAGE = 'mutual_support:index'
+toml_reader = TomlConfReader()
+api_data = WeatherAPI('Soustons', toml_reader.api_key('./conf.toml'))
+stamp = APITimestamp(api_data)
 
 
 def index(request):
     """vue pour la page d'accueil qui affiche une liste de categories
     distinctes et toutes les offres disponibles, triées par date.
     """
-    current_user_id = request.user.id
-    categories = Competence.objects.values_list('category', flat=True).distinct()
-    offers = Creneau.objects.filter(~Q(user=current_user_id)).order_by('date')
+    rainy_days: set = WeatherAPI.get_rainy_days(stamp.get_data())
+    offers = Creneau.objects.filter(~Q(user=request.user.id)).order_by('date')
+    categories: QuerySet = Competence.objects.values_list('category', flat=True).distinct()
+
+    Creneau.set_rainy_status(offers, rainy_days)
+
     context = {
         'categories': categories,
         'offers': offers,
-
+        'rainy_days': rainy_days,
     }
     return render(request, 'index.html', context)
 
@@ -94,7 +103,7 @@ def offers_form_view(request):
     else:
         form = CreneauForm()
 
-    return render(request, 'offers-form.html', {'form': form})  # The form variable is used here
+    return render(request, 'offers-form.html', {'form': form})
 
 
 @login_required(login_url="/login/")
@@ -110,7 +119,7 @@ def assistance_request_view(request):
     else:
         form = CreneauForm()
 
-    return render(request, 'assistance_request-form.html', {'form': form})  # The form variable is used here
+    return render(request, 'assistance_request-form.html', {'form': form})
 
 
 @login_required(login_url="/login/")
@@ -137,5 +146,8 @@ def category_view(request, category_slug):
 
 
 def competences(request):
-    competences = Competence.objects.all()
-    return render(request, 'competences.html', {'competences': competences})
+    """
+    Vue qui affiche la liste de toutes les compétences.
+    """
+    list_competences = Competence.objects.all()
+    return render(request, 'competences.html', {'competences': list_competences})
