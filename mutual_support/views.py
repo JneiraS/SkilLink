@@ -144,5 +144,8 @@ def category_view(request, category_slug):
 
 
 def competences(request):
-    competences = Competence.objects.all()
-    return render(request, 'competences.html', {'competences': competences})
+    """
+    Vue qui affiche la liste de toutes les compétences.
+    """
+    list_competences = Competence.objects.all()
+    return render(request, 'competences.html', {'competences': list_competences})
