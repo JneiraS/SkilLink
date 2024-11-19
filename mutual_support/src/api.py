@@ -11,8 +11,8 @@ class APImanager(ABC):
     @abstractmethod
     def fetch_data(self):
         """
-        Returns data from the API response.
-        The content of the returned data depends on the API.
+        Renvoie les données de la réponse de l'API.
+        Le contenu des données renvoyées dépend de l'API.
         """
         pass
 
