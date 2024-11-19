@@ -26,25 +26,26 @@ class WeatherAPI(APImanager):
         self.city = city
         self.api_key = api_key
 
-    def fetch_data(self):
+    def fetch_data(self) -> dict | None:
         """
-        Effectue une requête sur l'API OpenWeatherMap pour obtenir
-        les prévisions métoreologiques pour la ville spécifiée.
-        Renvoie le contenu de la réponse sous forme de dictionnaire
-        JSON.
+        Récupère les données de prévisions météorologiques de l'API OpenWeatherMap pour la ville spécifiée.
+        Renvoie le contenu de la réponse sous la forme d'un dictionnaire JSON, ou None en cas d'erreur.
         """
-        url = f"https://api.openweathermap.org/data/2.5/forecast"
-        params = {
+        api_url = "https://api.openweathermap.org/data/2.5/forecast"
+        query_params = {
             "q": self.city,
             "appid": self.api_key,
             "units": "metric",
             "lang": "fr",
             "exclude": "hourly,minutely,current,alerts"
         }
-        # API request
-        with requests.get(url, params=params) as response:
+        try:
+            response = requests.get(api_url, params=query_params)
             response.raise_for_status()
             return response.json()
+        except requests.exceptions.RequestException as error:
+            print(f"Error during OpenWeatherMap API request: {error}")
+            return None
 
     @staticmethod
     def get_rainy_days(data) -> set:
@@ -52,9 +53,7 @@ class WeatherAPI(APImanager):
         Renvoie un ensemble de dates au format 'AAAA-MM-JJ' pour lesquelles il est prévu de la pluie.
         Les dates sont extraites de la réponse de l'API OpenWeatherMap.
         """
+        if data is None:
+            return set()
+
         return set([c['dt_txt'][:10] for c in data['list'] if c['weather'][0]['main'] == 'Rain'])
-
-
-
-
-
