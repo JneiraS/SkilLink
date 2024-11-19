@@ -41,5 +41,5 @@ class APITimestamp(TimeStamp):
         if self.is_expired():
             self.data = self.api_manager.fetch_data()
             self.stamp = datetime.now()
-            print("Données de l'API mises à jour.")
+            print("[UPDATE] Données de l'API mises à jour.")
         return self.data
